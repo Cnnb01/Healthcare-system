@@ -35,7 +35,7 @@ A full-stack healthcare management system built with **React (Vite)** and **Expr
 
 ## 🚀 Getting Started
 
-### 🛠 Backend Setup
+### 🛠 Setup
 
 1. Navigate to the backend folder:
    ```bash
@@ -51,7 +51,12 @@ A full-stack healthcare management system built with **React (Vite)** and **Expr
     ```bash
     http://localhost:5173
 
+---
+
+
 ### 🤝 Acknowledgments
+
+
 This project was developed as part of an interview assignment and serves as a portfolio piece demonstrating:
 
 Full-stack development
@@ -61,6 +66,3 @@ Relational database design
 API integration
 
 UI/UX planning and execution
-
-
-
