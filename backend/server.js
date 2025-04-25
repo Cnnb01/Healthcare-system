@@ -156,6 +156,29 @@ app.get("/clients", async(req, res)=>{
         console.log("ERROR=>",error)
     }
 })
+//fetch a client
+app.get("/clients/:id", async (req, res) => {
+    const clientId = req.params.id;
+    try {
+        const result = await db.query(`
+            SELECT c.client_id, c.client_fullname, c.phone_no, c.identification_no,
+                   COALESCE(array_agg(p.program_name) FILTER (WHERE p.program_name IS NOT NULL), '{}') AS programs
+            FROM Clients c
+            LEFT JOIN Client_Programs cp ON c.client_id = cp.client_id
+            LEFT JOIN Programs p ON cp.program_id = p.program_id
+            WHERE c.client_id = $1
+            GROUP BY c.client_id
+        `, [clientId]);
+        if (result.rows.length === 0) {
+            return res.status(404).json({ message: "Client not found" });
+        }else{
+            res.json(result.rows[0]);
+        }
+    } catch (error) {
+        console.error("ERROR =>", error);
+    }
+});
+
 // add a client
 app.post("/client", async(req, res)=>{
     const {name,phoneno,idnum} = req.body
