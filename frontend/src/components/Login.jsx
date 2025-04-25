@@ -22,7 +22,7 @@ const Login = () => {
     const [role, setRole] = useState("")
     const handleSubmit = async (event)=>{
         event.preventDefault(); //prevents page refresh
-        console.log("The data in the form is=>",formData)
+        // console.log("The data in the form is=>",formData)
         try {
             const response = await fetch("http://localhost:8000/",
                 {
