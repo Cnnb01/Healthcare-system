@@ -17,7 +17,7 @@ function App() {
         <Routes>
         <Route path="/signup" element={<Signup/>}/>
         <Route path="/" element={<Login/>}/>
-          <Route path="/clients" element={<Clients/>}/>
+          <Route path="/clients" element={<ProtectedRoute requiredRole="doctor@gmail.com"><Clients/></ProtectedRoute>}/>
           <Route path="/dhome" element={<ProtectedRoute requiredRole="doctor@gmail.com"><Doctorhp/></ProtectedRoute>}/>
           <Route path="/rhome" element={<Receptionisthp/>}/>
         </Routes>
