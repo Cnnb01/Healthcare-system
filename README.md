@@ -42,15 +42,17 @@ A full-stack healthcare management system built with **React (Vite)** and **Expr
    cd backend
    npm install
    node server
+   ```
 2.  Navigate to the frontend folder:
    ```bash
     cd frontend
     npm install
     npm run dev
+    ```
 3. Open the app in your browser:
     ```bash
     http://localhost:5173
-
+    ```
 ---
 
 
