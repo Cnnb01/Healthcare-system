@@ -12,10 +12,8 @@ const ProtectedRoute = ({ children, requiredRole }) => {
                     credentials: "include"
             })
                 const data = await response.json();
-
                 // console.log("RESPONSEE.OK SAYSS=>",response.ok)
                 // console.log("DATA.MESSAGE SAYYS=>",data.message)
-
                 if (response.ok && data.role === requiredRole) {
                     setAuthenticated(true);
                 } else {

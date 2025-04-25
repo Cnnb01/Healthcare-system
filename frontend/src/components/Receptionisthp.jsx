@@ -90,7 +90,7 @@ const Receptionisthp = () => {
     }
     return (
         <>
-        <h1 className="text-center mt-3">Receptionist's Homepage</h1>
+        <h1 className="text-center mt-3">Healthly Health Care System💉</h1>
         <div className="text-end px-4">
           <button className="btn btn-outline-secondary" type="button" onClick={loggingOut}>Log out</button>
         </div>
@@ -126,7 +126,7 @@ const Receptionisthp = () => {
                           </div>
                           <div className="modal-footer">
                             <button className="btn btn-secondary" onClick={handleCloseModal}>Close</button>
-                            <button className="btn btn-primary" onClick={handleSaveClient}>Save Client</button>
+                            <button className="btn btn-secondary" style={{ backgroundColor: '#8DABCE', color: 'white' }} onClick={handleSaveClient}>Save Client</button>
                           </div>
                         </div>
                       </div>

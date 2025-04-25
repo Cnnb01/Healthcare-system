@@ -37,7 +37,7 @@ const Login = () => {
                 console.log("response from server=>", data)
                 //navigate to homepage
                 if(response.ok){
-                    alert ("login successfull")
+                    // alert ("login successfull")
                     if (role === "doctor@gmail.com") {
                         navigate("/dhome");
                     } else {
@@ -55,7 +55,8 @@ const Login = () => {
         navigate("/signup")
     }
     return ( <>
-<h1>Login page</h1>
+    <h1 style={{ textAlign: 'center', marginTop: '30px' }}>Healthly Health Care System💉</h1>
+    <div style={{ maxWidth: '400px',margin: '30px auto',padding: '30px',boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',borderRadius: '10px',backgroundColor: '#f9f9f9'}}>
     <form onSubmit={handleSubmit}>
         <div class="mb-3">
             <label htmlFor="exampleInputEmail1" class="form-label">Email address</label>
@@ -65,9 +66,10 @@ const Login = () => {
             <label htmlFor="exampleInputPassword1" class="form-label">Password</label>
             <input type="password" name="loginpassword" class="form-control" id="exampleInputPassword1" value={formData.loginpassword} onChange={handleChange}/>
         </div>
-        <button type="submit" class="btn btn-primary">Login</button>
+        <button type="submit" class="btn btn-primary" style={{ backgroundColor: '#8DABCE', color: 'white', width: '100%' }}>Login</button>
     </form>
-    <p>Dont have an account?<a href="#" onClick={handleSignup}> Signup</a> instead</p>
+    <p style={{ marginTop: '15px', textAlign: 'center' }}>Dont have an account?<a href="#" onClick={handleSignup}> Signup</a> instead</p>
+    </div>
     </>
     );
 }

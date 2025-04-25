@@ -83,7 +83,7 @@ const Doctorhp = () => {
     }
     return (
     <>
-    <h1 className="text-center mt-3">Doctor's homepage</h1>
+    <h1 className="text-center mt-3">Healthly Health Care System 💉</h1>
     <div className="text-end px-4">
         <button className="btn btn-outline-secondary" type="button" onClick={loggingOut}>Log out</button>
     </div>
@@ -119,7 +119,7 @@ const Doctorhp = () => {
                             </div>
                             <div className="modal-footer">
                                 <button className="btn btn-secondary" onClick={handleCloseModal}>Close</button>
-                                <button className="btn btn-primary" onClick={handleSaveProgram}>Save Program</button>
+                                <button className="btn btn-secondary"  style={{ backgroundColor: '#8DABCE', color: 'white' }}  onClick={handleSaveProgram}>Save Program</button>
                             </div>
                             </div>
                         </div>

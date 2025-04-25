@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react"
+import { useNavigate } from "react-router-dom"
 const Clients = () => {
+    const navigate = useNavigate()
     const [clients, setClients] = useState([])
     const [selectedProgram, setSelectedProgram] = useState("")
     const [programs, setPrograms] = useState([])
@@ -55,6 +57,10 @@ const Clients = () => {
         setSelectedProgram(e.target.value)
     }
 
+    const goBack = ()=>{
+        navigate("/dhome")
+    }
+
     useEffect(() => {
         fetchClients();
         fetchPrograms();
@@ -63,7 +69,10 @@ const Clients = () => {
 
     return (
     <>
-    <h1 className="text-center mt-3">Client's homepage</h1>
+    <h1 className="text-center mt-3">Healthly Health Care System 💉</h1>
+    <div className="text-start py-4 px-4">
+        <button className="btn btn-outline-secondary" type="button" onClick={goBack}>Back</button>
+    </div>
     <div className="container">
     <div className="row">
     {clients.map((client) => (
@@ -92,7 +101,7 @@ const Clients = () => {
                         <option key={prog.program_id} value={prog.program_id}>{prog.program_name}</option>
                       ))}
                     </select>
-                    <button className="btn btn-primary btn-sm me-2" onClick={() => handleSaveProgram(client.client_id)}>Save</button>
+                    <button className="btn btn-secondary btn-sm me-2" style={{ backgroundColor: '#8DABCE', color: 'white' }} onClick={() => handleSaveProgram(client.client_id)}>Save</button>
                     <button className="btn btn-secondary btn-sm" onClick={() => setEditingClientId(null)}>Cancel</button>
                   </>
                 ) : (
