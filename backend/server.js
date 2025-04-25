@@ -100,18 +100,14 @@ const verifyAdmin = (req,res,next)=>{
             // console.log("JWT Verification Error:", err.message);
             return res.status(403).json({ message: "Invalid token"});
         }
-        // console.log("Decoded JWT:", decoded);
+        // console.log("Decoded JWtT:", req.user.email );
         req.user = decoded
         next();
     });
 };
 
-app.get("/admin", verifyAdmin, (req, res) => {
-    if(req.user.email === "admin@gmail.com"){
-        res.json({ message: "Welcome Admin! You have access to this page." });
-    }else {
-        res.status(403).json({ message: "Access denied" });
-    }
+app.get("/verify", verifyAdmin, (req, res) => {
+    res.json({ role: req.user.email })
 });
 
 // programs

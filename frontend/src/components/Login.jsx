@@ -14,17 +14,23 @@ const Login = () => {
                 [name]:value
             }
         })
+        if (name === "email") {
+            setRole(value);
+            console.log("Role (email) updated to:", value);
+        }
     }
+    const [role, setRole] = useState("")
     const handleSubmit = async (event)=>{
         event.preventDefault(); //prevents page refresh
         console.log("The data in the form is=>",formData)
         try {
-            const response = await fetch("http://localhost:8000/",{
+            const response = await fetch("http://localhost:8000/",
+                {
                 method: "POST",
                 headers:{
                     "Content-Type":"application/json"
                 },
-                body: JSON.stringify(formData),
+                body: JSON.stringify({ ...formData, role }),
                 credentials: "include"
             })
                 const data = await response.json()
@@ -32,7 +38,12 @@ const Login = () => {
                 //navigate to homepage
                 if(response.ok){
                     alert ("login successfull")
-                    navigate("/rhome")
+                    if (role === "doctor@gmail.com") {
+                        navigate("/dhome");
+                    } else {
+                        console.log("THE ROLEEE", role)
+                        navigate("/rhome");
+                    }
                 }else{
                     alert(data.message)
                 }

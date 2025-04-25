@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import Clients from './components/Clients';
 import Doctorhp from './components/Doctorhp';
 import Login from './components/Login';
-import Programs from './components/Programs';
+import ProtectedRoute from './components/ProtectedRoute';
 import Receptionisthp from './components/Receptionisthp';
 import Signup from './components/Signup';
 import './App.css'
@@ -18,10 +18,8 @@ function App() {
         <Route path="/signup" element={<Signup/>}/>
         <Route path="/" element={<Login/>}/>
           <Route path="/clients" element={<Clients/>}/>
-          <Route path="/client/:client_id" element={<Clients/>}/>
-          <Route path="/dhome" element={<Doctorhp/>}/>
+          <Route path="/dhome" element={<ProtectedRoute requiredRole="doctor@gmail.com"><Doctorhp/></ProtectedRoute>}/>
           <Route path="/rhome" element={<Receptionisthp/>}/>
-          <Route path="/programs" element={<Programs/>}/>
         </Routes>
       </Router>
     </>
