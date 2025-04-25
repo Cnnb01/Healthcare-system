@@ -102,4 +102,4 @@ This project was developed as part of an interview assignment and serves as a po
 Made with 💙 by **Charity Nyamamba**
 
 - 📧 Email: [nyamambanyaguch@gmail.com](mailto:nyamambanyaguch@gmail.com)
-- 🌐 LinkedIn: [Your LinkedIn Profile](https://www.linkedin.com/in/charity-nyamamba/)
+- 🌐 LinkedIn: [Charity](https://www.linkedin.com/in/charity-nyamamba/)
