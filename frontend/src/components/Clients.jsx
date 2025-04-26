@@ -1,15 +1,18 @@
 import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
+import env from "dotenv";
 const Clients = () => {
     const navigate = useNavigate()
     const [clients, setClients] = useState([])
     const [selectedProgram, setSelectedProgram] = useState("")
     const [programs, setPrograms] = useState([])
     const [editingClientId, setEditingClientId] = useState(null);
+    const API_BASE_URL = "http://localhost:8000"
+
     // fetch clients
     const fetchClients = async()=>{
         try {
-            const response = await fetch("http://localhost:8000/clients")
+            const response = await fetch(`${API_BASE_URL}/clients`)
             const data = await response.json()
             setClients(data)
         } catch (error) {
@@ -20,7 +23,7 @@ const Clients = () => {
     // fetch programs
     const fetchPrograms = async () => {
         try {
-          const res = await fetch("http://localhost:8000/programs")
+          const res = await fetch(`${API_BASE_URL}/programs`)
           const data = await res.json()
           setPrograms(data)
         } catch (error) {
@@ -36,7 +39,7 @@ const Clients = () => {
     // save clients programs
     const handleSaveProgram = async (clientId) => {
         try {
-          await fetch(`http://localhost:8000/assign-prog`, {
+          await fetch(`${API_BASE_URL}/assign-prog`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json"
@@ -57,7 +60,7 @@ const Clients = () => {
         setSelectedProgram(e.target.value)
     }
 
-    const goBack = ()=>{
+    const backbtn = ()=>{
         navigate("/dhome")
     }
 
@@ -78,7 +81,7 @@ const Clients = () => {
     <>
     <h1 className="text-center mt-3">Healthly Health Care System 💉</h1>
     <div className="text-start py-4 px-4">
-        <button className="btn btn-outline-secondary" type="button" onClick={goBack}>Back</button>
+        <button className="btn btn-outline-secondary" type="button" onClick={backbtn}>Back</button>
     </div>
     <div className="container">
     <div className="row">
@@ -112,13 +115,14 @@ const Clients = () => {
                     </select>
                     <button className="btn btn-secondary btn-sm me-2" style={{ backgroundColor: '#8DABCE', color: 'white' }} onClick={() => handleSaveProgram(client.client_id)}>Save</button>
                     <button className="btn btn-secondary btn-sm" onClick={() => setEditingClientId(null)}>Cancel</button>
-                  </>
+                    </>
                 ) : (
                   <button className="btn btn-outline-secondary btn-sm" onClick={() => handleEdit(client.client_id)}>Edit</button>
                 )}
               </div>
             </div>
-          ))}
+        )
+    )}
         </div>
       </div>
     </>
