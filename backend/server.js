@@ -248,7 +248,7 @@ app.post("/assign-prog", async(req, res)=>{
 app.get("/logout", (req,res)=>{
     res.clearCookie("token",{
         httpOnly:true,
-        secure: true
+        secure: process.env.NODE_ENV === 'production'
     });
     res.json({message: "Logged out successfully"})
 })
