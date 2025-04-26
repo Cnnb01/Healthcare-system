@@ -110,7 +110,6 @@ Made with 💙 by **Charity Nyamamba**
 
 ## 📸 Screenshots
 
-> *(Add screenshots of the receptionist dashboard, doctor dashboard, modals, and program assignment UI here.)*
 > Receptionist HomepageDashboard ![alt text](image-1.png)
 > Recetionist Add Clients Functionality ![alt text](image-2.png)
 > Clients from receptionist's page ![alt text](image-3.png)
