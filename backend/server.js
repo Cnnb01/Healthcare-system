@@ -1,11 +1,9 @@
 import express from "express";
 import cors from "cors";
-import pg from "pg";
 import env from "dotenv";
 import jwt from "jsonwebtoken";
 import cookieParser from "cookie-parser"; //store the JWT in a cookie instead of sending it in the authorization header
 import bcrypt from "bcrypt";
-
 import pkg from 'pg';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -47,7 +45,7 @@ pool.connect((err, client, release) => {
 });
 
 const corsOptions = {
-    origin: ["http://localhost:5173", "https://healthcare-system-nu.vercel.app/"],
+    origin: ["http://localhost:5173", "https://healthcare-system-nu.vercel.app"],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
     allowedHeaders: ["Content-Type", "Authorization"],
