@@ -21,7 +21,7 @@ const Doctorhp = () => {
     };
 
     const handleSaveProgram = async() => {
-        console.log("Program to save:", newProgram);
+        // console.log("Program to save:", newProgram);
         try {
             const response = await fetch(`${API_BASE_URL}/program`,{
                 method:"POST",

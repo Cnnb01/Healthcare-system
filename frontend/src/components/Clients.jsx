@@ -68,7 +68,7 @@ const Clients = () => {
         fetchClients();
         fetchPrograms();
       }, []);
-      console.log("Clients with programs:", clients);
+    //   console.log("Clients with programs:", clients);
 
     const [searchQuery, setSearchQuery] = useState("");
     const handleSearch = (e)=>{

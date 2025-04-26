@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom"
 const Login = () => {
+    const API_BASE_URL = "http://localhost:8000"
     const [formData, setFormData] = useState({
         email:"",
         loginpassword:""
@@ -16,7 +17,7 @@ const Login = () => {
         })
         if (name === "email") {
             setRole(value);
-            console.log("Role (email) updated to:", value);
+            // console.log("Role/email updated to:", value);
         }
     }
     const [role, setRole] = useState("")
@@ -24,7 +25,7 @@ const Login = () => {
         event.preventDefault(); //prevents page refresh
         // console.log("The data in the form is=>",formData)
         try {
-            const response = await fetch("http://localhost:8000/",
+            const response = await fetch(`${API_BASE_URL}/`,
                 {
                 method: "POST",
                 headers:{
@@ -34,14 +35,13 @@ const Login = () => {
                 credentials: "include"
             })
                 const data = await response.json()
-                console.log("response from server=>", data)
+                // console.log("response from server=>", data)
                 //navigate to homepage
                 if(response.ok){
-                    // alert ("login successfull")
                     if (role === "doctor@gmail.com") {
                         navigate("/dhome");
                     } else {
-                        console.log("THE ROLEEE", role)
+                        // console.log("THE ROLEEE", role)
                         navigate("/rhome");
                     }
                 }else{
