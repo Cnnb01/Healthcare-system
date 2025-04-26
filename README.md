@@ -23,9 +23,9 @@ This platform is designed to streamline clinic operations by enabling receptioni
 ## 📁 Project Structure
 
 ```
-/client        # Frontend (React with Vite)
+/frontend        # Frontend (React with Vite)
 /backend       # Backend (Express.js)
-/database      # SQL setup (tables and seed data)
+/backend(pg admin)      # SQL setup (tables and seed data)
 ```
 
 ---
@@ -67,7 +67,7 @@ This platform is designed to streamline clinic operations by enabling receptioni
 
 1. Navigate to the frontend directory:
    ```bash
-   cd client
+   cd frontend
    ```
 
 2. Install dependencies:
