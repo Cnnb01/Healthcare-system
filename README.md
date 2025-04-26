@@ -111,10 +111,10 @@ Made with 💙 by **Charity Nyamamba**
 ## 📸 Screenshots
 
 > Receptionist HomepageDashboard !(/CEMA%20PROJECT/Healthcare-system/screenshots/image-1.png)
-> Recetionist Add Clients Functionality !(/CEMA%20PROJECT/Healthcare-system/screenshots/image-2.png)
-> Clients from receptionist's page !(/CEMA%20PROJECT/Healthcare-system/screenshots/image-3.png)
-> Doctor's homepage !(/CEMA%20PROJECT/Healthcare-system/screenshots/image-5.png)
-> Doctor's health programs !(/CEMA%20PROJECT/Healthcare-system/screenshots/image-4.png)
-> Client's view from doctor's page !(/CEMA%20PROJECT/Healthcare-system/screenshots/image-6.png)
+> Recetionist Add Clients Functionality ![alt text](/CEMA%20PROJECT/Healthcare-system/screenshots/image-2.png)
+> Clients from receptionist's page ![alt text](/CEMA%20PROJECT/Healthcare-system/screenshots/image-3.png)
+> Doctor's homepage ![alt text](/CEMA%20PROJECT/Healthcare-system/screenshots/image-5.png)
+> Doctor's health programs ![alt text](/CEMA%20PROJECT/Healthcare-system/screenshots/image-4.png)
+> Client's view from doctor's page ![alt text](/CEMA%20PROJECT/Healthcare-system/screenshots/image-6.png)
 
 ---
