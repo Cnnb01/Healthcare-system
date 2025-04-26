@@ -1,10 +1,11 @@
-import express from "express";
-import cors from "cors";
-import pg from "pg";
-import env from "dotenv";
-import jwt from "jsonwebtoken";
-import cookieParser from "cookie-parser"; //store the JWT in a cookie instead of sending it in the authorization header
-import bcrypt from "bcrypt";
+const express = require('express');
+const cors = require('cors');
+const pg = require('pg');
+const env = require('dotenv');
+const jwt = require('jsonwebtoken');
+const cookieParser = require('cookie-parser');
+const bcrypt = require('bcrypt');
+
 
 env.config()
 const app = express()
@@ -216,3 +217,5 @@ app.get("/logout", (req,res)=>{
 app.listen(port, ()=>{
     console.log(`Server running on port ${port}`)
 });
+module.exports = app;
+
