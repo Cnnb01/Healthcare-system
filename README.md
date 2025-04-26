@@ -91,6 +91,7 @@ This project was developed as part of an interview assignment and serves as a po
 
 - Full-stack development (React + Express)
 - Relational database design with PostgreSQL
+- Security features such as password hashing and role authorization.
 - RESTful API architecture
 - UI/UX best practices
 - Vite-based frontend tooling
@@ -103,3 +104,18 @@ Made with 💙 by **Charity Nyamamba**
 
 - 📧 Email: [nyamambanyaguch@gmail.com](mailto:nyamambanyaguch@gmail.com)
 - 🌐 LinkedIn: [Charity](https://www.linkedin.com/in/charity-nyamamba/)
+
+
+---
+
+## 📸 Screenshots
+
+> *(Add screenshots of the receptionist dashboard, doctor dashboard, modals, and program assignment UI here.)*
+> Receptionist HomepageDashboard ![alt text](image-1.png)
+> Recetionist Add Clients Functionality ![alt text](image-2.png)
+> Clients from receptionist's page ![alt text](image-3.png)
+> Doctor's homepage ![alt text](image-5.png)
+> Doctor's health programs ![alt text](image-4.png)
+> Client's view from doctor's page ![alt text](image-6.png)
+
+---
