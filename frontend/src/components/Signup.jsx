@@ -44,6 +44,8 @@ const Signup = () => {
     }
     return (
     <>
+    <h1 style={{ textAlign: 'center', marginTop: '30px' }}>Healthly Health Care System💉</h1>
+    <div style={{ maxWidth: '400px',margin: '30px auto',padding: '30px',boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',borderRadius: '10px',backgroundColor: '#f9f9f9'}}>
     <form onSubmit={handleSubmit}>
         <div class="mb-3">
             <label htmlFor="exampleInputName" class="form-label">Full Name</label>
@@ -59,6 +61,7 @@ const Signup = () => {
         </div>
         <button type="submit" class="btn btn-primary">Signup</button>
     </form>
+    </div>
     </>
     );
 }
