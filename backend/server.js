@@ -252,7 +252,7 @@ app.get("/logout", (req,res)=>{
     });
     res.json({message: "Logged out successfully"})
 })
-// export default app;
-app.listen(port, ()=>{
-    console.log(`Server running on port ${port}`)
-});
+export default app;
+// app.listen(port, ()=>{
+//     console.log(`Server running on port ${port}`)
+// });
