@@ -13,7 +13,7 @@ const { Pool } = pkg;
 
 env.config()
 const app = express()
-const port = process.env.PORT || 8000
+// const port = process.env.PORT || 8000
 const saltRounds = 10
 app.use(express.json())
 app.use(cookieParser());
@@ -254,8 +254,7 @@ app.get("/logout", (req,res)=>{
     });
     res.json({message: "Logged out successfully"})
 })
-
+export default app;
 // app.listen(port, ()=>{
 //     console.log(`Server running on port ${port}`)
 // });
-export default app;
