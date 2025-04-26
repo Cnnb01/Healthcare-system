@@ -51,6 +51,7 @@ const corsOptions = {
     allowedHeaders: ["Content-Type", "Authorization"],
     optionsSuccessStatus: 200,
 };
+app.use(cors(corsOptions));
 app.options("*", cors(corsOptions));
 app.use((req, res, next) => {
     // console.log("Request Method:", req.method);
