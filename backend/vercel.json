@@ -6,15 +6,10 @@
       "use": "@vercel/node"
     }
   ],
-  "routes": [
+  "rewrites": [
     {
       "src": "/(.*)",
       "dest": "backend/server.js"
     }
-  ],
-  "env": {
-    "POSTGRES_URL": "postgresql://healthcare_owner:npg_qD21QGmfBopZ@ep-old-darkness-a4oso6uv-pooler.us-east-1.aws.neon.tech/healthcare?sslmode=require",
-    "JWT_SECRET": "@MYJWTsecretkeyy@"
-  }
+  ]
 }
-  
