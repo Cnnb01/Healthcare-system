@@ -252,6 +252,10 @@ app.get("/logout", (req,res)=>{
     });
     res.json({message: "Logged out successfully"})
 })
+
+app.get('/favicon.ico', (req, res) => res.status(204).end());
+app.get('/favicon.png', (req, res) => res.status(204).end());
+
 export default app;
 // app.listen(port, ()=>{
 //     console.log(`Server running on port ${port}`)
