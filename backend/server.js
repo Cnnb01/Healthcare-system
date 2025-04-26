@@ -31,7 +31,7 @@ const pool = new Pool({
     connectionString: process.env.POSTGRES_URL,
 })
 // Export the pool for use in other modules
-pool.connect((err, client, release) => {
+pool.query((err, client, release) => {
     if (err) {
         return console.error('Error acquiring client', err.stack);
     }
@@ -117,6 +117,7 @@ app.post("/", async(req,res)=>{
                         const cookiecreated = res.cookie("token", token, {
                             httpOnly: true,
                             secure: process.env.NODE_ENV === 'production',
+                            sameSite: 'None',
                             maxAge: 3600000
                         })
                         // console.log("COOKIE CREATED=>", cookiecreated)
