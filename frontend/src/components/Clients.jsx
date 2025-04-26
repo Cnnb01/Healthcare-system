@@ -67,6 +67,13 @@ const Clients = () => {
       }, []);
       console.log("Clients with programs:", clients);
 
+    const [searchQuery, setSearchQuery] = useState("");
+    const handleSearch = (e)=>{
+        setSearchQuery(e.target.value)
+    }
+    const filteredClients = clients.filter((client) =>
+        client.client_fullname.toLowerCase().includes(searchQuery.toLowerCase())
+    );
     return (
     <>
     <h1 className="text-center mt-3">Healthly Health Care System 💉</h1>
@@ -75,7 +82,9 @@ const Clients = () => {
     </div>
     <div className="container">
     <div className="row">
-    {clients.map((client) => (
+    <input type="text" className="form-control mb-4" placeholder="Search clients..." value={searchQuery} onChange={handleSearch} />
+
+    {filteredClients.map((client) => (
             <div className="col-md-4 mb-4" key={client.client_id}>
               <div className="p-4 rounded shadow-sm" style={{backgroundColor: "#f1f3f5", border: "1px solid #dee2e6",minHeight: "250px"}}>
               <h5 style={{ color: "#495057" }}>{client.client_fullname}</h5>
