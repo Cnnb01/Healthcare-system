@@ -45,7 +45,7 @@ pool.connect((err, client, release) => {
 });
 
 const corsOptions = {
-    origin: ["http://localhost:5173", "https://healthcare-system-nu.vercel.app"],
+    origin: ["https://healthcare-system-nu.vercel.app"],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
     allowedHeaders: ["Content-Type", "Authorization"],
