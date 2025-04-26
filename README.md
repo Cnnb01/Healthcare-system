@@ -110,7 +110,7 @@ Made with 💙 by **Charity Nyamamba**
 
 ## 📸 Screenshots
 
-> Receptionist HomepageDashboard ![alt text](image-1.png)
+> Receptionist HomepageDashboard ![alt text](/CEMA%20PROJECT/Healthcare-system/screenshots/image-1.png)
 > Recetionist Add Clients Functionality ![alt text](image-2.png)
 > Clients from receptionist's page ![alt text](image-3.png)
 > Doctor's homepage ![alt text](image-5.png)
