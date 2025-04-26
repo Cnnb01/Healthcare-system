@@ -23,7 +23,7 @@ const Doctorhp = () => {
     const handleSaveProgram = async() => {
         console.log("Program to save:", newProgram);
         try {
-            const response = await fetch("http://localhost:8000/program",{
+            const response = await fetch(`${API_BASE_URL}/program`,{
                 method:"POST",
                 headers:{
                     "Content-Type": "application/json",
@@ -47,7 +47,7 @@ const Doctorhp = () => {
     const [searchQuery, setSearchQuery] = useState("");
     const handleViewPrograms = async () => {
         try {
-          const response = await fetch("http://localhost:8000/programs");
+          const response = await fetch(`${API_BASE_URL}/programs`);
           const data = await response.json();
           setProgramList(data);
           setShowViewModal(true);
@@ -72,7 +72,7 @@ const Doctorhp = () => {
     };
     const loggingOut = async()=>{
         try {
-            const response = await fetch("http://localhost:8000/logout",{
+            const response = await fetch(`${API_BASE_URL}/logout`,{
                 credentials: "include"
             })
             const data = await response.json();
