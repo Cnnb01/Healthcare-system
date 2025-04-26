@@ -111,10 +111,10 @@ Made with 💙 by **Charity Nyamamba**
 ## 📸 Screenshots
 
 > Receptionist HomepageDashboard ![alt text](./screenshots/image-1.png)
-> Recetionist Add Clients Functionality ![alt text](image-2.png)
-> Clients from receptionist's page ![alt text](image-3.png)
-> Doctor's homepage ![alt text](image-5.png)
-> Doctor's health programs ![alt text](image-4.png)
-> Client's view from doctor's page ![alt text](image-6.png)
+> Recetionist Add Clients Functionality ![alt text](./screenshots/image-2.png)
+> Clients from receptionist's page ![alt text](./screenshots/image-3.png)
+> Doctor's homepage ![alt text](./screenshots/image-5.png)
+> Doctor's health programs ![alt text](./screenshots/image-4.png)
+> Client's view from doctor's page ![alt text](./screenshots/image-6.png)
 
 ---
