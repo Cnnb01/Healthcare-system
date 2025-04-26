@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react"
 import { Navigate } from "react-router-dom"
 const ProtectedRoute = ({ children, requiredRole }) => {
+    const API_BASE_URL = "http://localhost:8000"
     const [authenticated, setAuthenticated] = useState(false)
     const [loading, setLoading] = useState(true)
 
     useEffect(()=>{
         const checkAuth = async ()=>{
             try {
-                const response = await fetch("http://localhost:8000/verify",{
+                const response = await fetch(`${API_BASE_URL}/verify`,{
                     method: "GET",
                     credentials: "include"
             })

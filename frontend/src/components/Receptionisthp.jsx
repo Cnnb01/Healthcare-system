@@ -2,6 +2,7 @@ import Footer from "./Footer";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom"
 const Receptionisthp = () => {
+    const API_BASE_URL = "http://localhost:8000"
     const navigate = useNavigate()
     //create new client
     const [newClient, setNewClient] = useState({
@@ -32,7 +33,7 @@ const Receptionisthp = () => {
     const handleSaveClient = async() => {
         console.log("Client to add", newClient);
         try {
-            const response = await fetch("http://localhost:8000/client",{
+            const response = await fetch(`${API_BASE_URL}/client`,{
                 method:"POST",
                 headers:{
                     "Content-Type": "application/json",
@@ -53,7 +54,7 @@ const Receptionisthp = () => {
     const [clientList, setClientList] = useState([]);
     const handleViewClients = async()=>{
         try {
-            const response = await fetch("http://localhost:8000/clients");
+            const response = await fetch(`${API_BASE_URL}/clients`);
             const data = await response.json();
             setClientList(data);
             setShowViewModal(true);
@@ -79,7 +80,7 @@ const Receptionisthp = () => {
 
     const loggingOut = async()=>{
         try {
-            const response = await fetch("http://localhost:8000/logout",{
+            const response = await fetch(`${API_BASE_URL}/logout`,{
                 credentials: "include"
             })
             const data = await response.json();
