@@ -124,6 +124,7 @@ app.get("/programs", async(req,res)=>{
         console.log(error)
     }
 })
+
 //add a program
 app.post("/program", async(req, res)=>{
     const {newprogram} = req.body
@@ -156,6 +157,7 @@ app.get("/clients", async(req, res)=>{
         console.log("ERROR=>",error)
     }
 })
+
 //fetch a client
 app.get("/clients/:id", async (req, res) => {
     const clientId = req.params.id;

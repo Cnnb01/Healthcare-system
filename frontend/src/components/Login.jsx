@@ -55,8 +55,8 @@ const Login = () => {
         navigate("/signup")
     }
     return ( <>
-    <h1 style={{ textAlign: 'center', marginTop: '30px' }}>Healthly Health Care System💉</h1>
-    <div style={{ maxWidth: '400px',margin: '30px auto',padding: '30px',boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',borderRadius: '10px',backgroundColor: '#f9f9f9'}}>
+    <h1 className=".form-sizestyle">Healthly Health Care System💉</h1>
+    <div className="formdiv">
     <form onSubmit={handleSubmit}>
         <div class="mb-3">
             <label htmlFor="exampleInputEmail1" class="form-label">Email address</label>

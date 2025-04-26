@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom"
 const Signup = () => {
+    const API_BASE_URL = "http://localhost:8000"
     const [formData, setFormData] = useState({
         name:"",
         email:"",
@@ -21,7 +22,7 @@ const Signup = () => {
         event.preventDefault(); //prevents page refresh
         console.log("The data in the form is=>",formData)
         try {
-            const response = await fetch("http://localhost:8000/signup",{
+            const response = await fetch(`${API_BASE_URL}/signup`,{
                 method: "POST",
                 headers:{
                     "Content-Type":"application/json"
@@ -44,8 +45,8 @@ const Signup = () => {
     }
     return (
     <>
-    <h1 style={{ textAlign: 'center', marginTop: '30px' }}>Healthly Health Care System💉</h1>
-    <div style={{ maxWidth: '400px',margin: '30px auto',padding: '30px',boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',borderRadius: '10px',backgroundColor: '#f9f9f9'}}>
+    <h1 className="form-sizestyle">Healthly Health Care System💉</h1>
+    <div className="formdiv">
     <form onSubmit={handleSubmit}>
         <div class="mb-3">
             <label htmlFor="exampleInputName" class="form-label">Full Name</label>
