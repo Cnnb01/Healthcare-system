@@ -45,20 +45,20 @@ const Signup = () => {
     }
     return (
     <>
-    <h1 className="form-sizestyle">Healthly Health Care System💉</h1>
+    <h1 className="form-sizestyle">Healthly Health Care System</h1>
     <div className="formdiv">
     <form onSubmit={handleSubmit}>
         <div class="mb-3">
             <label htmlFor="exampleInputName" class="form-label">Full Name</label>
-            <input type="name" name="name" class="form-control" id="exampleInputName" aria-describedby="nameHelp" value={formData.fullname} onChange={handleChange}/>
+            <input type="name" name="name" class="form-control" id="exampleInputName" aria-describedby="nameHelp" value={formData.name} onChange={handleChange}/>
         </div>
         <div class="mb-3">
             <label htmlFor="exampleInputEmail1" class="form-label">Email address</label>
-            <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value={formData.myemail} onChange={handleChange}/>
+            <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value={formData.email} onChange={handleChange}/>
         </div>
         <div class="mb-3">
             <label htmlFor="exampleInputPassword1" class="form-label">Password</label>
-            <input type="password" name="password" class="form-control" id="exampleInputPassword1" value={formData.mypswd} onChange={handleChange}/>
+            <input type="password" name="password" class="form-control" id="exampleInputPassword1" value={formData.password} onChange={handleChange}/>
         </div>
         <button type="submit" class="btn btn-primary">Signup</button>
     </form>
