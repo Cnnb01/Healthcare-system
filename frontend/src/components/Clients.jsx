@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
-import env from "dotenv";
 const Clients = () => {
     const navigate = useNavigate()
     const [clients, setClients] = useState([])
@@ -79,7 +78,7 @@ const Clients = () => {
     );
     return (
     <>
-    <h1 className="text-center mt-3">Healthly Health Care System 💉</h1>
+    <h1 className="text-center mt-3">Healthly Health Care System</h1>
     <div className="text-start py-4 px-4">
         <button className="btn btn-outline-secondary" type="button" onClick={backbtn}>Back</button>
     </div>
@@ -91,8 +90,8 @@ const Clients = () => {
             <div className="col-md-4 mb-4" key={client.client_id}>
               <div className="p-4 rounded shadow-sm" style={{backgroundColor: "#f1f3f5", border: "1px solid #dee2e6",minHeight: "250px"}}>
               <h5 style={{ color: "#495057" }}>{client.client_fullname}</h5>
-                <p className="mb-1">📞 {client.phone_no}</p>
-                <p className="mb-1">🆔 {client.identification_no}</p>
+                <p className="mb-1"> {client.phone_no}</p>
+                <p className="mb-1"> {client.identification_no}</p>
                 <div className="mb-2">
                   <strong>Programs:</strong>
                   <ul className="ps-3">

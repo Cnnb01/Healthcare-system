@@ -5,13 +5,6 @@ import env from "dotenv";
 import jwt from "jsonwebtoken";
 import cookieParser from "cookie-parser"; //store the JWT in a cookie instead of sending it in the authorization header
 import bcrypt from "bcrypt";
-// const express = require('express');
-// const cors = require('cors');
-// const pg = require('pg');
-// const env = require('dotenv');
-// const jwt = require('jsonwebtoken');
-// const cookieParser = require('cookie-parser');
-// const bcrypt = require('bcrypt');
 
 env.config()
 const app = express()
@@ -20,7 +13,7 @@ const saltRounds = 10
 const db = new pg.Client({
     user:"postgres",
     host:"localhost",
-    database:"CEMAHealthcare",
+    database:"cemahealthcare",
     password:process.env.DATABASE_PASSWORD,
     port: 5432
 });
@@ -38,7 +31,7 @@ app.post('/signup', async(req,res)=>{
     try {
         const confirmUser = await db.query("SELECT * FROM Users WHERE email=$1", [email])
         if(confirmUser.rows.length > 0){
-            res.send({ message:"User already exists, try loging in instead"})
+            res.send({ message:"User already exists, try logging in instead"})
         }
         else{
             //password hashing
@@ -73,20 +66,20 @@ app.post("/", async(req,res)=>{
                         //step1:create a token
                         // console.log("the email is =>", email)
                         const token = jwt.sign({email:email},SECRET_KEY,{ expiresIn: "1h" })
-                        // console.log("SECRET_KEY in Login:", SECRET_KEY);
                         // console.log("Generated Token =>", token);
                         const decoded = jwt.decode(token);
-                        console.log("Decoded JWT =>", decoded);
+                        // console.log("Decoded JWT =>", decoded);
                         //step2:convert the token into a cookie
                         const cookiecreated = res.cookie("token", token, {
                             httpOnly: true,
                             secure: false,
                             maxAge: 3600000
                         })
-                        // console.log("COOKIE CREATED=>", cookiecreated)
+                        // console.log("COOKIE CREATED=>",cookiecreated)
                         res.json({ success: true, message: "Login successful", token });
                     } else {
-                        res.status(401).json({ success: false, message: "Invalid credentials" });
+                        // console.log("Invalid credentials for email:", email);
+                        res.status(401).json({ success: false, message: "Invalid credentials" });   
                     }
                 }
             })

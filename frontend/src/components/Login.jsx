@@ -7,6 +7,7 @@ const Login = () => {
         loginpassword:""
     })
     const navigate = useNavigate()//initialize navigation
+    const [role, setRole] = useState("")
     const handleChange = (event)=>{
         const {value, name} = event.target
         setFormData((prevValue)=>{
@@ -20,7 +21,6 @@ const Login = () => {
             // console.log("Role/email updated to:", value);
         }
     }
-    const [role, setRole] = useState("")
     const handleSubmit = async (event)=>{
         event.preventDefault(); //prevents page refresh
         // console.log("The data in the form is=>",formData)
@@ -46,6 +46,7 @@ const Login = () => {
                     }
                 }else{
                     alert(data.message)
+                    // console.log(`Login failed with status ${response.status}:`, data.message)
                 }
         } catch (error) {
             console.error("Error:", error);
@@ -55,7 +56,7 @@ const Login = () => {
         navigate("/signup")
     }
     return ( <>
-    <h1 className=".form-sizestyle">Healthly Health Care System💉</h1>
+    <h1 className=".form-sizestyle">Healthly Health Care System</h1>
     <div className="formdiv">
     <form onSubmit={handleSubmit}>
         <div class="mb-3">

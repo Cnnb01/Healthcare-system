@@ -83,7 +83,7 @@ const Doctorhp = () => {
     }
     return (
     <>
-    <h1 className="text-center mt-3">Healthly Health Care System 💉</h1>
+    <h1 className="text-center mt-3">Healthly Health Care System </h1>
     <div className="text-end px-4">
         <button className="btn btn-outline-secondary" type="button" onClick={loggingOut}>Log out</button>
     </div>
