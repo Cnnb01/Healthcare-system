@@ -204,6 +204,28 @@ app.post("/assign-prog", async(req, res)=>{
     }
 })
 
+app.get("/visit", async (req, res) => {
+    try{
+        const result = await db.query("SELECT * FROM Visits");
+        res.json(result.rows);
+    }catch(error){
+        console.error("Error fetching visits", error);
+        res.status(500).json({ message: "Error fetching visits" });
+    }
+})
+
+// adding visits
+app.post("/visit", async (req, res) => {
+    const {client_id, temperature, heart_rate, blood_pressure_sys, blood_pressure_dia, chief_complaint} = req.body;
+    try {
+        const result = await db.query("INSERT INTO Visits (client_id, temperature, heart_rate, blood_pressure_sys, blood_pressure_dia, chief_complaint) VALUES ($1, $2, $3, $4, $5, $6)", [client_id, temperature, heart_rate, blood_pressure_sys, blood_pressure_dia, chief_complaint]);
+        res.status(201).json({ message: "Visit saved successfully",visit: result.rows[0] });
+    } catch (error) {
+        console.error("Error saving visit", error);
+        res.status(500).json({ message: "Error logging visit" });
+    }
+})
+
 //logout
 app.get("/logout", (req,res)=>{
     res.clearCookie("token",{
