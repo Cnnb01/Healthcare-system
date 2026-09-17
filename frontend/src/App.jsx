@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import Clients from './components/Clients';
 import Doctorhp from './components/Doctorhp';

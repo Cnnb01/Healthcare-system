@@ -52,9 +52,9 @@ const Login = () => {
             console.error("Error:", error);
         }
     }
-    const handleSignup = ()=>{
-        navigate("/signup")
-    }
+    // const handleSignup = ()=>{
+    //     navigate("/signup")
+    // }
     return ( <>
     <h1 className=".form-sizestyle">Healthly Health Care System</h1>
     <div className="formdiv">
@@ -69,7 +69,7 @@ const Login = () => {
         </div>
         <button type="submit" class="btn btn-primary" style={{ backgroundColor: '#8DABCE', color: 'white', width: '100%' }}>Login</button>
     </form>
-    <p style={{ marginTop: '15px', textAlign: 'center' }}>Dont have an account?<a href="#" onClick={handleSignup}> Signup</a> instead</p>
+    {/* <p style={{ marginTop: '15px', textAlign: 'center' }}>Dont have an account?<a href="#" onClick={handleSignup}> Signup</a> instead</p> */}
     </div>
     </>
     );
