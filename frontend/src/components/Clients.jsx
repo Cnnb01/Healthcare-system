@@ -86,42 +86,65 @@ const Clients = () => {
     <div className="row">
     <input type="text" className="form-control mb-4" placeholder="Search clients..." value={searchQuery} onChange={handleSearch} />
 
-    {filteredClients.map((client) => (
-            <div className="col-md-4 mb-4" key={client.client_id}>
-              <div className="p-4 rounded shadow-sm" style={{backgroundColor: "#f1f3f5", border: "1px solid #dee2e6",minHeight: "250px"}}>
-              <h5 style={{ color: "#495057" }}>{client.client_fullname}</h5>
-                <p className="mb-1"> {client.phone_no}</p>
-                <p className="mb-1"> {client.identification_no}</p>
-                <div className="mb-2">
-                  <strong>Programs:</strong>
-                  <ul className="ps-3">
+    {filteredClients.map((client) => {
+    // Helper function to color-code the AI Priority
+    const getPriorityBadge = (priority) => {
+        if (priority === 0) return <span className="badge bg-danger ms-2">🔴 CRITICAL</span>;
+        if (priority === 1) return <span className="badge bg-warning text-dark ms-2">🟡 URGENT</span>;
+        if (priority === 2) return <span className="badge bg-success ms-2">🟢 STABLE</span>;
+        return <span className="badge bg-secondary ms-2">Awaiting Triage</span>;
+    };
+
+    return (
+        <div className="col-md-4 mb-4" key={client.client_id}>
+            <div className="p-4 rounded shadow-sm" style={{backgroundColor: "#f1f3f5", border: "1px solid #dee2e6",minHeight: "250px"}}>
+                
+                <h5 style={{ color: "#495057" }}>
+                    {client.client_fullname} 
+                    {getPriorityBadge(client.triage_priority)}
+                </h5>
+                
+                <p className="mb-1 text-muted"><small>ID: {client.identification_no} | Tel: {client.phone_no}</small></p>
+                
+                {/* NEW: Display the symptoms if they exist */}
+                {client.symptoms && (
+                    <div className="alert alert-light p-2 mb-2 border">
+                        <strong>Symptoms: </strong><br/>
+                        <small>{client.symptoms}</small>
+                    </div>
+                )}
+
+                <div className="mb-2 mt-3">
+                    <strong>Programs:</strong>
+                    <ul className="ps-3">
                     {client.programs && client.programs.length > 0 ? (
-                      client.programs.map((prog, index) => (
+                        client.programs.map((prog, index) => (
                         <li key={index} style={{ color: "#8DABCE" }}>{prog}</li>
-                      ))
+                        ))
                     ) : (
-                      <li className="text-muted">None</li>
+                        <li className="text-muted">None</li>
                     )}
-                  </ul>
+                    </ul>
                 </div>
+                
                 {editingClientId === client.client_id ? (
                     <>
                     <select className="form-select mb-2" value={selectedProgram} onChange={handleSelectProg}>
-                      <option value=""> Select Program </option>
-                      {programs.map((prog) => (
+                        <option value=""> Select Program </option>
+                        {programs.map((prog) => (
                         <option key={prog.program_id} value={prog.program_id}>{prog.program_name}</option>
-                      ))}
+                        ))}
                     </select>
                     <button className="btn btn-secondary btn-sm me-2" style={{ backgroundColor: '#8DABCE', color: 'white' }} onClick={() => handleSaveProgram(client.client_id)}>Save</button>
                     <button className="btn btn-secondary btn-sm" onClick={() => setEditingClientId(null)}>Cancel</button>
                     </>
                 ) : (
-                  <button className="btn btn-outline-secondary btn-sm" onClick={() => handleEdit(client.client_id)}>Edit</button>
+                    <button className="btn btn-outline-secondary btn-sm" onClick={() => handleEdit(client.client_id)}>Assign Program</button>
                 )}
-              </div>
             </div>
-        )
-    )}
+        </div>
+    );
+})}
         </div>
       </div>
     </>
