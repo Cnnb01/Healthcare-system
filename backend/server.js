@@ -142,11 +142,17 @@ app.get("/clients", async(req, res)=>{
     try {
         const result = await db.query((`
             SELECT c.client_id, c.client_fullname, c.phone_no, c.identification_no,
-                   COALESCE(array_agg(p.program_name) FILTER (WHERE p.program_name IS NOT NULL), '{}') AS programs
+                   COALESCE(array_agg(p.program_name) FILTER (WHERE p.program_name IS NOT NULL), '{}') AS programs,
+                   -- We grab the latest visit data for this client
+                    (SELECT triage_priority FROM Visits v WHERE v.client_id = c.client_id ORDER BY visit_date DESC LIMIT 1) as triage_priority,
+                    (SELECT chief_complaint FROM Visits v WHERE v.client_id = c.client_id ORDER BY visit_date DESC LIMIT 1) as symptoms
             FROM Clients c
             LEFT JOIN Client_Programs cp ON c.client_id = cp.client_id
             LEFT JOIN Programs p ON cp.program_id = p.program_id
             GROUP BY c.client_id
+            -- NEW: Order by the AI priority so Critical (0) shows up first!
+            ORDER BY 
+                (SELECT triage_priority FROM Visits v WHERE v.client_id = c.client_id ORDER BY visit_date DESC LIMIT 1) ASC NULLS LAST;
           `))
         if(result.rows.length < 0){
             res.json({ message: "No clients found"});
