@@ -224,7 +224,31 @@ app.get("/visit", async (req, res) => {
 app.post("/visit", async (req, res) => {
     const {client_id, temperature, heart_rate, blood_pressure_sys, blood_pressure_dia, chief_complaint} = req.body;
     try {
-        const result = await db.query("INSERT INTO Visits (client_id, temperature, heart_rate, blood_pressure_sys, blood_pressure_dia, chief_complaint) VALUES ($1, $2, $3, $4, $5, $6)", [client_id, temperature, heart_rate, blood_pressure_sys, blood_pressure_dia, chief_complaint]);
+        // step 1: Ask the AI Microservice for the Priority Score ---
+        // (We use native fetch in Node.js to talk to our Python server)
+        const aiResponse = await fetch("http://localhost:8001/api/v1/predict-triage", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                // Ensure the data types match what Python Pydantic expects
+                temperature: parseFloat(temperature),
+                heart_rate: parseInt(heart_rate),
+                blood_pressure_sys: parseInt(blood_pressure_sys),
+                blood_pressure_dia: parseInt(blood_pressure_dia),
+                chief_complaint: chief_complaint
+            })
+        });
+        if(!aiResponse.ok){
+            throw new Error(`AI Microservice responded with status ${aiResponse.status}`);
+        }
+        const aiData = await aiResponse.json();
+        const calculated_priority = aiData.triage_priority;
+        console.log(`AI predicted priority ${calculated_priority} for client ${client_id}`);
+        // --- step 2: Save everything to PostgreSQL ---
+        // Notice we added triage_priority to the INSERT statement!
+        const result = await db.query("INSERT INTO Visits (client_id, temperature, heart_rate, blood_pressure_sys, blood_pressure_dia, chief_complaint,triage_priority) VALUES ($1, $2, $3, $4, $5, $6, $7)", [client_id, temperature, heart_rate, blood_pressure_sys, blood_pressure_dia, chief_complaint, calculated_priority]);
         res.status(201).json({ message: "Visit saved successfully",visit: result.rows[0] });
     } catch (error) {
         console.error("Error saving visit", error);
