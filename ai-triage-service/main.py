@@ -14,6 +14,8 @@ except Exception as e:
     print(f"Error loading model: {e}")
 # define stracture of the data that will be sent from Express.js(like a typescript interface)
 class TriageRequest(BaseModel):
+    age: int
+    pain_level: int
     temperature: float
     blood_pressure_sys: int
     blood_pressure_dia: int
@@ -26,6 +28,8 @@ def predict_triage(request: TriageRequest):
     try:
         # Convert the incoming JSON data into a PandasDataFrame
         input_data = pd.DataFrame([{
+            'age': request.age,
+            'pain_level': request.pain_level,
             'temperature': request.temperature,
             'blood_pressure_sys': request.blood_pressure_sys,
             'blood_pressure_dia': request.blood_pressure_dia,
