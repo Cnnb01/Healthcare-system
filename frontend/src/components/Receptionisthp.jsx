@@ -82,11 +82,13 @@ const Receptionisthp = () => {
     const [showTriageModal, setShowTriageModal] = useState(false);
     const [selectedClient, setSelectedClient] = useState(null);
     const [visitData, setVisitData] = useState({
-        temperature: "",
-        blood_pressure_sys: "",
-        blood_pressure_dia: "",
-        heart_rate: "",
-        chief_complaint: ""
+      age: "",
+      pain_level: "",
+      temperature: "",
+      blood_pressure_sys: "",
+      blood_pressure_dia: "",
+      heart_rate: "",
+      chief_complaint: ""
     });
 
     const handleOpenTriage = (client) => {
@@ -238,6 +240,14 @@ const Receptionisthp = () => {
                           </div>
                           <div className="modal-body">
                             <div className="row">
+                                <div className="col-6 mb-3">
+                                    <label className="form-label">Age</label>
+                                    <input type="number" name="age" className="form-control" value={visitData.age} onChange={handleVisitChange} required />
+                                </div>
+                                <div className="col-6 mb-3">
+                                    <label className="form-label">Pain Level (1-10)</label>
+                                    <input type="number" name="pain_level" min="1" max="10" className="form-control" value={visitData.pain_level} onChange={handleVisitChange} required />
+                                </div>
                                 <div className="col-6 mb-3">
                                     <label className="form-label">Temp (°C)</label>
                                     <input type="number" step="0.1" name="temperature" className="form-control" value={visitData.temperature} onChange={handleVisitChange} />
