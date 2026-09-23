@@ -222,7 +222,7 @@ app.get("/visit", async (req, res) => {
 
 // adding visits
 app.post("/visit", async (req, res) => {
-    const {client_id, temperature, heart_rate, blood_pressure_sys, blood_pressure_dia, chief_complaint} = req.body;
+    const {client_id, age, pain_level, temperature, heart_rate, blood_pressure_sys, blood_pressure_dia, chief_complaint} = req.body;
     try {
         // step 1: Ask the AI Microservice for the Priority Score ---
         // (We use native fetch in Node.js to talk to our Python server)
@@ -233,6 +233,8 @@ app.post("/visit", async (req, res) => {
             },
             body: JSON.stringify({
                 // Ensure the data types match what Python Pydantic expects
+                age: parseInt(age),
+                pain_level: parseInt(pain_level),
                 temperature: parseFloat(temperature),
                 heart_rate: parseInt(heart_rate),
                 blood_pressure_sys: parseInt(blood_pressure_sys),
@@ -248,7 +250,7 @@ app.post("/visit", async (req, res) => {
         console.log(`AI predicted priority ${calculated_priority} for client ${client_id}`);
         // --- step 2: Save everything to PostgreSQL ---
         // Notice we added triage_priority to the INSERT statement!
-        const result = await db.query("INSERT INTO Visits (client_id, temperature, heart_rate, blood_pressure_sys, blood_pressure_dia, chief_complaint,triage_priority) VALUES ($1, $2, $3, $4, $5, $6, $7)", [client_id, temperature, heart_rate, blood_pressure_sys, blood_pressure_dia, chief_complaint, calculated_priority]);
+        const result = await db.query("INSERT INTO Visits (client_id, age, pain_level, temperature, heart_rate, blood_pressure_sys, blood_pressure_dia, chief_complaint, triage_priority) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)", [client_id, age, pain_level, temperature, heart_rate, blood_pressure_sys, blood_pressure_dia, chief_complaint, calculated_priority]);
         res.status(201).json({ message: "Visit saved successfully",visit: result.rows[0] });
     } catch (error) {
         console.error("Error saving visit", error);
