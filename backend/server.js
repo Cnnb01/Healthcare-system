@@ -110,50 +110,22 @@ app.get("/verify", verifyAdmin, (req, res) => {
     res.json({ role: req.user.email })
 });
 
-// programs
-//fetch programs
-app.get("/programs", async(req,res)=>{
-    try {
-        const result = await db.query("SELECT * FROM Programs")
-        if(result.rows.length < 0){
-            res.json({ message: "No programs found"});
-        } else {
-            res.json(result.rows);
-        }
-    } catch (error) {
-        console.log(error)
-    }
-})
-
-//add a program
-app.post("/program", async(req, res)=>{
-    const {newprogram} = req.body
-    try {
-        const result = await db.query("INSERT INTO Programs (program_name) VALUES ($1)",[newprogram])
-        res.json({ message: "Program added successfully" });
-    } catch (error) {
-        console.log("ERROR=>",error)
-    }
-})
-
 // clients
 // fetch clients
 app.get("/clients", async(req, res)=>{
     try {
-        const result = await db.query((`
+        const result = await db.query(`
             SELECT c.client_id, c.client_fullname, c.phone_no, c.identification_no,
-                   COALESCE(array_agg(p.program_name) FILTER (WHERE p.program_name IS NOT NULL), '{}') AS programs,
-                   -- We grab the latest visit data for this client
-                    (SELECT triage_priority FROM Visits v WHERE v.client_id = c.client_id ORDER BY visit_date DESC LIMIT 1) as triage_priority,
-                    (SELECT chief_complaint FROM Visits v WHERE v.client_id = c.client_id ORDER BY visit_date DESC LIMIT 1) as symptoms
+                   (SELECT visit_id FROM Visits v WHERE v.client_id = c.client_id ORDER BY visit_id DESC LIMIT 1) as visit_id,
+                   (SELECT status FROM Visits v WHERE v.client_id = c.client_id ORDER BY visit_id DESC LIMIT 1) as status,
+                   (SELECT triage_priority FROM Visits v WHERE v.client_id = c.client_id ORDER BY visit_id DESC LIMIT 1) as triage_priority,
+                   (SELECT chief_complaint FROM Visits v WHERE v.client_id = c.client_id ORDER BY visit_id DESC LIMIT 1) as symptoms
             FROM Clients c
-            LEFT JOIN Client_Programs cp ON c.client_id = cp.client_id
-            LEFT JOIN Programs p ON cp.program_id = p.program_id
-            GROUP BY c.client_id
-            -- NEW: Order by the AI priority so Critical (0) shows up first!
+            -- Order so 'Pending' visits show up first, sorted by AI priority (0 = Critical)
             ORDER BY 
-                (SELECT triage_priority FROM Visits v WHERE v.client_id = c.client_id ORDER BY visit_date DESC LIMIT 1) ASC NULLS LAST;
-          `))
+                (SELECT status FROM Visits v WHERE v.client_id = c.client_id ORDER BY visit_id DESC LIMIT 1) DESC,
+                (SELECT triage_priority FROM Visits v WHERE v.client_id = c.client_id ORDER BY visit_id DESC LIMIT 1) ASC NULLS LAST;
+          `)
         if(result.rows.length < 0){
             res.json({ message: "No clients found"});
         } else {
@@ -169,13 +141,9 @@ app.get("/clients/:id", async (req, res) => {
     const clientId = req.params.id;
     try {
         const result = await db.query(`
-            SELECT c.client_id, c.client_fullname, c.phone_no, c.identification_no,
-                   COALESCE(array_agg(p.program_name) FILTER (WHERE p.program_name IS NOT NULL), '{}') AS programs
-            FROM Clients c
-            LEFT JOIN Client_Programs cp ON c.client_id = cp.client_id
-            LEFT JOIN Programs p ON cp.program_id = p.program_id
-            WHERE c.client_id = $1
-            GROUP BY c.client_id
+            SELECT client_id, client_fullname, phone_no, identification_no
+            FROM Clients 
+            WHERE client_id = $1
         `, [clientId]);
         if (result.rows.length === 0) {
             return res.status(404).json({ message: "Client not found" });
@@ -198,17 +166,6 @@ app.post("/client", async(req, res)=>{
     }
 })
 
-// asigning client programs
-app.post("/assign-prog", async(req, res)=>{
-    const {client_id, program_id} = req.body;
-    try {
-        const response = await db.query("INSERT INTO Client_Programs (client_id, program_id) VALUES ($1, $2)",[client_id, program_id])
-        res.json({ message: "Program assigned" });
-    } catch (error) {
-        console.error("Assign failed", error);
-    res.status(500).json({ message: "Error assigning program" });
-    }
-})
 
 app.get("/visit", async (req, res) => {
     try{
@@ -255,6 +212,22 @@ app.post("/visit", async (req, res) => {
     } catch (error) {
         console.error("Error saving visit", error);
         res.status(500).json({ message: "Error logging visit" });
+    }
+})
+
+// assigning diagnosis and treatment
+app.put("/visit/:visit_id/examine", async(req, res) => {
+    const { visit_id } = req.params;
+    const { doctor_diagnosis, treatment_plan } = req.body;
+    try{
+        const result = await db.query("UPDATE Visits SET doctor_diagnosis=$1, treatment_plan=$2, status='examined' WHERE visit_id=$3 RETURNING *", [doctor_diagnosis, treatment_plan, visit_id]);
+        if(result.rows.length === 0){
+            return res.status(404).json({ message: "Visit not found" });
+        }
+        res.status(200).json({ message: "Patient examined and given a treatment plan", visit: result.rows[0] });
+    }catch(error){
+        console.error("Error logging patient diagnosis =>", error);
+        res.status(500).json({ message: "Error updating visit record" });
     }
 })
 
