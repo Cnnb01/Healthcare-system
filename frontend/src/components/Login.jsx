@@ -59,15 +59,15 @@ const Login = () => {
     <h1 className=".form-sizestyle">Healthly Health Care System</h1>
     <div className="formdiv">
     <form onSubmit={handleSubmit}>
-        <div class="mb-3">
-            <label htmlFor="exampleInputEmail1" class="form-label">Email address</label>
-            <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value={formData.email} onChange={handleChange}/>
+        <div className="mb-3">
+            <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
+            <input type="email" name="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value={formData.email} onChange={handleChange}/>
         </div>
-        <div class="mb-3">
-            <label htmlFor="exampleInputPassword1" class="form-label">Password</label>
-            <input type="password" name="loginpassword" class="form-control" id="exampleInputPassword1" value={formData.loginpassword} onChange={handleChange}/>
+        <div className="mb-3">
+            <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
+            <input type="password" name="loginpassword" className="form-control" id="exampleInputPassword1" value={formData.loginpassword} onChange={handleChange}/>
         </div>
-        <button type="submit" class="btn btn-primary" style={{ backgroundColor: '#8DABCE', color: 'white', width: '100%' }}>Login</button>
+        <button type="submit" className="btn btn-primary" style={{ backgroundColor: '#8DABCE', color: 'white', width: '100%' }}>Login</button>
     </form>
     {/* <p style={{ marginTop: '15px', textAlign: 'center' }}>Dont have an account?<a href="#" onClick={handleSignup}> Signup</a> instead</p> */}
     </div>
