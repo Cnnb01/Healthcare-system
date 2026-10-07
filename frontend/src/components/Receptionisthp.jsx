@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom"
 const Receptionisthp = () => {
     const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
     const navigate = useNavigate()
+    const [isAnalyzing, setIsAnalyzing] = useState(false);
     //create new client
     const [newClient, setNewClient] = useState({
         name:"",
@@ -114,6 +115,9 @@ const Receptionisthp = () => {
     };
 
     const handleSaveVisit = async () => {
+      e.preventDefault();
+      // 1. Turn on the loading spinner!
+      setIsAnalyzing(true);
         try {
             const response = await fetch(`${API_BASE_URL}/visit`, {
                 method: "POST",
@@ -124,11 +128,24 @@ const Receptionisthp = () => {
                 })
             });
             if(!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+            setVisitData({
+                age: "",
+                pain_level: "",
+                temperature: "",
+                blood_pressure_sys: "",
+                blood_pressure_dia: "",
+                heart_rate: "",
+                chief_complaint: ""
+            });
+            setShowTriageModal(false);
             alert("Vitals logged successfully!");
             handleCloseTriage();
         } catch (error) {
             console.error("Error logging visit:", error);
             alert("Failed to log vitals.");
+        } finally {
+            // 2. Turn off the loading spinner!
+            setIsAnalyzing(false);
         }
     };
 
@@ -272,7 +289,11 @@ const Receptionisthp = () => {
                           </div>
                           <div className="modal-footer">
                             <button className="btn btn-secondary" onClick={handleCloseTriage}>Cancel</button>
-                            <button className="btn " style={{ backgroundColor: '#8DABCE', color: 'white' }} onClick={handleSaveVisit}>Save</button>
+                            <button className="btn " style={{ backgroundColor: '#8DABCE', color: 'white' }} disabled={isAnalyzing} onClick={handleSaveVisit}>{isAnalyzing?(
+                              <>
+                              <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                                Analyzing vitals...</>
+                            ):("Save")}</button>
                           </div>
                         </div>
                       </div>
