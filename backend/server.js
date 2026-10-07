@@ -11,15 +11,15 @@ const app = express()
 const port = 8000
 const saltRounds = 10
 const db = new pg.Client({
-    user:"postgres",
-    host:"localhost",
-    database:"cemahealthcare",
-    password:process.env.DATABASE_PASSWORD,
-    port: 5432
+    user: process.env.DATABASE_USER,
+    host: process.env.DATABASE_HOST,
+    database: process.env.DATABASE_NAME,
+    password: process.env.DATABASE_PASSWORD,
+    port: process.env.DATABASE_PORT
 });
 db.connect();
 
-app.use(cors({ origin: process.env.VITE_API_URL, credentials: true })); //CORS allows the frontend to make API requests to the backend.
+app.use(cors({ origin: process.env.FRONTEND_URL, credentials: true })); //CORS allows the frontend to make API requests to the backend.
 app.use(express.json())
 app.use(cookieParser());
 
@@ -183,7 +183,7 @@ app.post("/visit", async (req, res) => {
     try {
         // step 1: Ask the AI Microservice for the Priority Score ---
         // (We use native fetch in Node.js to talk to our Python server)
-        const aiResponse = await fetch(`${process.env.API_BASE_URL}/api/v1/predict-triage`, {
+        const aiResponse = await fetch(`${process.env.AI_SERVICE_URL}/api/v1/predict-triage`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
