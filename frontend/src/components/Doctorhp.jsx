@@ -2,7 +2,7 @@ import Footer from "./Footer";
 import { useNavigate } from "react-router-dom"
 const Doctorhp = () => {
     const navigate = useNavigate()
-    const API_BASE_URL = "http://localhost:8000"
+    const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
     const handleViewClients = () => {
         navigate("/clients")

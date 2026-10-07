@@ -19,7 +19,7 @@ const db = new pg.Client({
 });
 db.connect();
 
-app.use(cors({ origin: "http://localhost:5173", credentials: true })); //CORS allows the frontend to make API requests to the backend.
+app.use(cors({ origin: process.env.VITE_API_URL, credentials: true })); //CORS allows the frontend to make API requests to the backend.
 app.use(express.json())
 app.use(cookieParser());
 
@@ -183,7 +183,7 @@ app.post("/visit", async (req, res) => {
     try {
         // step 1: Ask the AI Microservice for the Priority Score ---
         // (We use native fetch in Node.js to talk to our Python server)
-        const aiResponse = await fetch("http://localhost:8001/api/v1/predict-triage", {
+        const aiResponse = await fetch(`${process.env.API_BASE_URL}/api/v1/predict-triage`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

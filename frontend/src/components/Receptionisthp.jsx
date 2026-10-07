@@ -2,7 +2,7 @@ import Footer from "./Footer";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom"
 const Receptionisthp = () => {
-    const API_BASE_URL = "http://localhost:8000"
+    const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
     const navigate = useNavigate()
     //create new client
     const [newClient, setNewClient] = useState({
