@@ -23,7 +23,9 @@ const db = new pg.Client({
 });
 db.connect();
 
-app.use(cors({ origin: process.env.FRONTEND_URL, credentials: true })); //CORS allows the frontend to make API requests to the backend.
+app.use(cors({
+    origin: process.env.FRONTEND_URL,
+    credentials: true })); //CORS allows the frontend to make API requests to the backend.
 app.use(express.json())
 app.use(cookieParser());
 
@@ -76,7 +78,8 @@ app.post("/", async(req,res)=>{
                         //step2:convert the token into a cookie
                         const cookiecreated = res.cookie("token", token, {
                             httpOnly: true,
-                            secure: false,
+                            secure: true,
+                            sameSite: "None", // Set to "None" for cross-site cookies
                             maxAge: 3600000
                         })
                         // console.log("COOKIE CREATED=>",cookiecreated)
