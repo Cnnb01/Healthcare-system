@@ -114,7 +114,7 @@ const Receptionisthp = () => {
         setVisitData((prev) => ({ ...prev, [name]: value }));
     };
 
-    const handleSaveVisit = async () => {
+    const handleSaveVisit = async (e) => {
       e.preventDefault();
       // 1. Turn on the loading spinner!
       setIsAnalyzing(true);
