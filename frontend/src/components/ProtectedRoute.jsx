@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import { Navigate } from "react-router-dom"
 const ProtectedRoute = ({ children, requiredRole }) => {
-    const API_BASE_URL = "http://localhost:8000"
+    const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
     const [authenticated, setAuthenticated] = useState(false)
     const [loading, setLoading] = useState(true)
 
