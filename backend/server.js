@@ -214,7 +214,7 @@ app.post("/visit", async (req, res) => {
         console.log(`AI predicted priority ${calculated_priority} for client ${client_id}`);
         // --- step 2: Save everything to PostgreSQL ---
         // Notice we added triage_priority to the INSERT statement!
-        const result = await db.query("INSERT INTO Visits (client_id, age, pain_level, temperature, heart_rate, blood_pressure_sys, blood_pressure_dia, chief_complaint, triage_priority) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)", [client_id, age, pain_level, temperature, heart_rate, blood_pressure_sys, blood_pressure_dia, chief_complaint, calculated_priority]);
+        const result = await db.query("INSERT INTO Visits (client_id, age, pain_level, temperature, heart_rate, blood_pressure_sys, blood_pressure_dia, chief_complaint, triage_priority) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *", [client_id, age, pain_level, temperature, heart_rate, blood_pressure_sys, blood_pressure_dia, chief_complaint, calculated_priority]);
         res.status(201).json({ message: "Visit saved successfully",visit: result.rows[0] });
     } catch (error) {
         console.error("Error saving visit", error);
