@@ -20,7 +20,7 @@ const Signup = () => {
     //for form submition
     const handleSubmit = async(event)=>{
         event.preventDefault(); //prevents page refresh
-        console.log("The data in the form is=>",formData)
+        // console.log("The data in the form is=>",formData)
         try {
             const response = await fetch(`${API_BASE_URL}/signup`,{
                 method: "POST",
@@ -30,7 +30,7 @@ const Signup = () => {
                 body: JSON.stringify(formData)
             })
             const data = await response.json()
-            console.log("response fro server=>", data)
+            // console.log("response fro server=>", data)
             //navigate to homepage
             if(response.ok){
                 alert ("user created successfully")
